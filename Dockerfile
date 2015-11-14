@@ -7,15 +7,17 @@ EXPOSE 22
 
 # Install packages
 RUN yum update -y
-RUN yum install -y wget gcc make gcc openssl-devel sqlite-devel git libffi-devel openssh-server python-setuptools
+RUN yum install -y gcc git libffi-devel make openssh-server openssl-devel python-setuptools sqlite-devel wget
 
 # Install Python3
 RUN mkdir /src/
 WORKDIR /src/
 
-RUN wget -O - https://www.python.org/ftp/python/3.4.3/Python-3.4.3.tar.xz | xzcat | tar xv
+ENV PY_VER=3.5.0
 
-WORKDIR /src/Python-3.4.3/
+RUN wget -O - https://www.python.org/ftp/python/$PY_VER/Python-$PY_VER.tar.xz | xzcat | tar xv
+
+WORKDIR /src/Python-$PY_VER/
 
 RUN ./configure && make -j3 && make install -j3
 RUN pip3 install --upgrade pip
