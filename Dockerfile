@@ -1,4 +1,4 @@
-FROM centos:latest
+FROM registry.esav.fi:5000/centos
 
 MAINTAINER Esa Varemo <esa@kuivanto.fi>
 
